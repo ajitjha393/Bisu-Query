@@ -9,7 +9,35 @@ const $ = (...args) => {
 	} else if(typeof args[0] === 'string') {
 		// Element is a selector
 		const selector = args[0]
-		return document.querySelectorAll(selector)
-	}
+		const collection =  document.querySelectorAll(selector)
 
-}
+		collection.css = (...cssArgs) => {
+
+			if(typeof cssArgs[0] === 'string') {
+				const [property, value] = cssArgs
+
+				collection.forEach((element, i) => {
+					element.style[property] = value
+				});
+
+			}else if(typeof cssArgs[0] === 'object') {
+
+					const cssProps = Object.entries(cssArgs[0])
+
+					collection.forEach(element => {
+						cssProps.forEach(([property, value]) => {
+								element.style[property] = value
+							});
+
+					})
+
+
+					};
+
+			}
+
+			return collection
+
+
+	}
+	}
