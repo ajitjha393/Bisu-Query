@@ -44,5 +44,10 @@ const $ = (...args) => {
 		};
 
 		return collection;
+	} else if (
+		typeof args[0] === 'object' &&
+		args[0].constructor.name.startsWith('HTML')
+	) {
+		console.log('We have an element!');
 	}
 };
